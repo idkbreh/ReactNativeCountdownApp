@@ -5,7 +5,7 @@ import { Picker } from '@react-native-picker/picker';
 
 const hours = Array.from({ length: 24 }, (_, i) => i);
 const minutes = Array.from({ length: 60 }, (_, i) => i);
-const seconds = Array.from({ length: 60 }, (_, i) => i);//ai gen
+const seconds = Array.from({ length: 60 }, (_, i) => i);
 
 function CountdownComponent() {
   const [selectedHour, setSelectedHour] = useState(0);
@@ -35,8 +35,12 @@ function CountdownComponent() {
       parseInt(selectedHour) * 3600 +
       parseInt(selectedMinute) * 60 +
       parseInt(selectedSecond);
-    setTotalSeconds(total);
-    setIsActive(true);
+    if (total === 0) {
+      Alert.alert("Countdown can't be zero");
+    } else {
+      setTotalSeconds(total);
+      setIsActive(true);
+    }
   };
 
   const resetTimer = () => {
@@ -48,10 +52,9 @@ function CountdownComponent() {
   };
 
   const formatTime = (seconds) => {
-    const hrs = String(Math.floor(seconds / 3600)).padStart(2, '0');
     const mins = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
     const secs = String(seconds % 60).padStart(2, '0');
-    return `${hrs}:${mins}:${secs}`;
+    return `${mins}:${secs}`;
   };
 
   return (
@@ -60,18 +63,10 @@ function CountdownComponent() {
       {!isActive && (
         <View style={styles.pickerContainer}>
           <Picker
-            selectedValue={selectedHour}
-            onValueChange={(itemValue) => setSelectedHour(itemValue)}
-            style={styles.picker}
-          >
-            {hours.map((hour) => (
-              <Picker.Item key={hour} label={`${hour}`} value={hour} />
-            ))}
-          </Picker>
-          <Picker
             selectedValue={selectedMinute}
             onValueChange={(itemValue) => setSelectedMinute(itemValue)}
             style={styles.picker}
+            itemStyle={styles.pickerItem}
           >
             {minutes.map((minute) => (
               <Picker.Item key={minute} label={`${minute}`} value={minute} />
@@ -81,6 +76,7 @@ function CountdownComponent() {
             selectedValue={selectedSecond}
             onValueChange={(itemValue) => setSelectedSecond(itemValue)}
             style={styles.picker}
+            itemStyle={styles.pickerItem}
           >
             {seconds.map((second) => (
               <Picker.Item key={second} label={`${second}`} value={second} />
@@ -105,30 +101,36 @@ function CountdownComponent() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  time: {
-    fontSize: 48,
-    marginBottom: 20,
-  },
-  pickerContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  picker: {
-    width: 100,
-    height: 150,
-  },
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '80%',
-  },
+
+    container: {
+        backgroundColor: 'rgba(0, 0, 0, 0.82)',
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    time: {
+        fontSize: 80,
+        marginBottom: 20,
+        color: 'white',
+    },
+    pickerContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 20,
+    },
+    picker: {
+        width: 100,
+        height: 150,
+    },
+    pickerItem: {
+        color: 'white', // Ensure the picker item text is white
+    },
+    row: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '80%',
+    },
 });
 
 export default CountdownComponent;

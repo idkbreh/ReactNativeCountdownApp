@@ -7,13 +7,13 @@ import DetailsScreen from './screens/DetailsScreen.jsx';
 import TimerScreen from './screens/TimerScreen.jsx';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-const Stack = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Timer">
-        <Stack.Screen name="Timer" component={TimerScreen} />
+      <Stack.Navigator screenOptions={{ headerShown: false ,tabBarStyle: {backgroundColor:'rgba(0, 0, 0, 0.82)'}}} initialRouteName="Timer">
+        <Stack.Screen name="Timer" component={TimerScreen} screenOptions={{ headerShown: false }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

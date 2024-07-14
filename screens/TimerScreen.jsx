@@ -15,6 +15,7 @@ function TimerScreen() {
     <>
     <View style={styles.container}>
         <Text> </Text> 
+
         <Button
             style={styles.button}
             icon="globe-model"
@@ -33,11 +34,13 @@ function TimerScreen() {
 
 const styles = StyleSheet.create({
     container: {
-      justifyContent: 'center',
-      alignItems: 'center',
+        color:'white',
+        backgroundColor:'rgba(0, 0, 0, 0.82)',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     button: {
-      marginTop: 20,
+      marginTop: 50,
     },
   });
 

@@ -54,12 +54,15 @@ function TimerComponent() {
 
 const styles = StyleSheet.create({
   container: {
+    color:'white',
+    backgroundColor:'rgba(0, 0, 0, 0.82)',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
   time: {
-    fontSize: 48,
+    color:'white',
+    fontSize: 60,
     marginBottom: 20,
   },
   row: {
